@@ -1,13 +1,19 @@
-name: CI Pipeline
+name: CI with Docker
 
 on: [push]
 
 jobs:
-  run-script:
+  docker-build:
+
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Run app
-        run: bash app.sh
+      - name: Build Docker image
+        run: docker build -t saad-cidocker .
+
+      - name: Run Docker container
+        run: docker run saad-ci-docker
+
